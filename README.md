@@ -3,17 +3,31 @@
 
 This project is co-authored by Philip Ngo and David Khatanassian
 
-We explored how different network architectures affect the classification of handwritten digits from MNIST dataset. The learning task was to predict for pairs of images if the first digit is lesser or equal to the second. To accomplish this task we created two main architectures called JointNet and SplitNet. With the JointNet architecture two networks were created:
-* WSN
-* WOSN
+We explored how different network architectures affect the classification of handwritten digits from MNIST dataset. The learning task was to predict for pairs of images if the first digit is lesser or equal to the second. To accomplish this task we created two main architectures called JointNet and SplitNet. Both architectures have dropout and batch normalization implemented as optional features.  The deep networks are trained on 1k pairs of digits and the goal was to achieve a ~15% error rate. As it is a classification task, we opted for either Cross Entropy Loss or BCE loss for multiple outputs or single output respectively.
+
+### Files
+* architectures - Contains the 3 networks: WSN, WOSN, SplitNet. 
+* train - Contains functions for training the networks and counting errors.
+* dlc_practical_prologue.py - Create pairs from MNIST data. Provided by François Fleuret (https://fleuret.org/ee559-2018/dlc/).
+* test.py - An executable with all functions and modules, simplified and condensed into a single file. Used to obtain one run of the entire project using default values. Useful for quick tests or demonstrations.  
+* data - Contains MNIST data (http://yann.lecun.com/exdb/mnist/).
+* images - Contains images used in this file.
+
+### Project overview
+
+With the JointNet architecture two networks were created:
+* WSN: Consists of two stages, digit classification and digit comparison. An auxiliary loss is obtained in the digit classification, which compliments the training. The first stage is a Siamese network and the second stage is a fully connected layer. 
+![Image 1](https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/WSN.png)
+
+* WOSN: Both digits enter the CNN at the same time, each with its own weights (weight sharing). Since there is no intermediary digit classification, this network is not benefited by an auxiliary loss. 
+![Image 2](https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/WOSN.png)
+
+Lastly, as its name suggets, Splitnet is an architecture where the task is split in two disconnected networks (the output from the classification task is detached from the computational graph). This results in two separate and independent backpropagations, where the losses from the classification network (ClassifyNet) and comparison network (CompareNet) don't influence each other. 
+
+![Image 3](https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/Split.png)
 
 
-The deep networks are trained on 1k pairs of digits and the goal was to achieve a ~15% error rate. As it is a classification task, we opted for either Cross Entropy Loss or BCE loss for multiple outputs or single output respectively.
 
-
-Files:
-* test.py - Includes all functions and modules, simplified and condensed into a single file. Can be executed to obtain one run of the entire project using default   
-* dlc_practical_prologue.py - Create pairs from MNIST data. Provided by François Fleuret (https://fleuret.org/ee559-2018/dlc/)
 
 
 
