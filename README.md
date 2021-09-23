@@ -19,14 +19,21 @@ We explored how different network architectures affect the classification of han
 
 With the JointNet architecture two networks were created:
 * WSN: Consists of two stages, digit classification and digit comparison. An auxiliary loss is obtained in the digit classification, which compliments the training. The first stage is a Siamese network and the second stage is a fully connected layer. 
-![Image 1](https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/WSN.png)
+
+<p align="center">
+  <img src="https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/WSN.png" width="70%" height="70%">
+</p>
 
 * WOSN: Both digits enter the CNN at the same time, each with its own weights (weight sharing). Since there is no intermediary digit classification, this network is not benefited by an auxiliary loss. 
-![Image 2](https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/WOSN.png)
+<p align="center">
+  <img src="https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/WOSN.png" width="70%" height="70%">
+</p>
 
 Lastly, as its name suggets, Splitnet is an architecture where the task is split in two disconnected networks (the output from the classification task is detached from the computational graph). This results in two separate and independent backpropagations, where the losses from the classification network (ClassifyNet) and comparison network (CompareNet) don't influence each other. 
 
-![Image 3](https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/Split.png)
+<p align="center">
+  <img src="https://github.com/jpruzcuen/DL-Digit-comparison/blob/main/Images/Split.png" width="70%" height="70%">
+</p>
 
 
 
